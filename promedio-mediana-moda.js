@@ -1,13 +1,15 @@
-function calcularPromedio(lista) {
+const MarsMath = {};
+
+MarsMath.calcularPromedio = function calcularPromedio(lista) {
   function sumarElementos(valorAcumulado, nuevoValor){
         return valorAcumulado + nuevoValor;
     }
     const sumaLista = lista.reduce(sumarElementos);
     const average = sumaLista / lista.length;
-    return "El promedio es " + Math.floor(average);
+    return average;
 }
 
-function isEven (arr){
+MarsMath.isEven = function isEven(arr){
     let size = arr.length;
     if(size%2==0){
       return true;
@@ -16,7 +18,7 @@ function isEven (arr){
     }
 }  
   
-function orderArr(arr){
+MarsMath.orderArr = function orderArr(arr){
   function orderArrSort(a, b){
     return a - b;
   }
@@ -24,23 +26,23 @@ function orderArr(arr){
   return orderedArr;
 }
 
-function calcularMediana(arr){
-    const orderedArr = orderArr(arr);
-    const arrIsEven = isEven(arr);
+MarsMath.calcularMediana = function calcularMediana(arr){
+    const orderedArr = MarsMath.orderArr(arr);
+    const arrIsEven = MarsMath.isEven(arr);
 
     if (arrIsEven){
-      const indexMiddleItem1 = Math.floor((orderedArr.length)/2)
-      const indexMiddleItem2 = Math.floor(orderedArr.length/2 + 1)
+      const indexMiddleItem1 = Math.floor((orderedArr.length)/2) -1;
+      const indexMiddleItem2 = Math.floor(orderedArr.length/2);
       const medianaEven = Math.floor((orderedArr[indexMiddleItem1] + orderedArr[indexMiddleItem2]) / 2)
-      return "La mediana es " + medianaEven;
+      return medianaEven;
     }else{
         const indexMiddleItem = Math.floor(orderedArr.length/2);
         const medianaOdd = orderedArr[indexMiddleItem];
-        return "La mediana es " + medianaOdd;
+        return medianaOdd;
     }
 }
 
-function calcularModa(arr){
+MarsMath.calcularModa = function calcularModa(arr){
   const arrCount = {};
   for (let i=0; i < arr.length; i++){
     const item = arr[i];
@@ -56,10 +58,10 @@ function calcularModa(arr){
   const orderedArray = orderBidimentionalArr(arrArray);
   const elementMaxNumber = orderedArray[orderedArray.length -1];
   const moda = elementMaxNumber[0];
-  return "La moda es " + moda;
+  return moda;
 }
 
-function orderBidimentionalArr(arr){
+MarsMath.orderBidimentionalArr = function orderBidimentionalArr(arr){
   function orderArrSort(valorAcumulado, nuevoValor){
     return valorAcumulado[1] - nuevoValor[1];
   }
