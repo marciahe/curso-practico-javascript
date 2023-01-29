@@ -4,7 +4,7 @@ function findUser(userToFind) {
     return salarios.find(user => user.name == userToFind);
 }
 
-function medianaUser(userName) {
+function medianUser(userName) {
     const jobs = findUser(userName).trabajos;
     const salarios = jobs.map(function (item){
         return item.salario;
@@ -88,8 +88,31 @@ function projectedSalaryByCompany (company) {
         const projectedSalary = lastMedian + increase;
         
         return projectedSalary;
-    
-    
     }
 }
 
+function generalMedian () {
+    const medianList = salarios.map(
+        person => medianUser(person.name)
+    );
+    const median = MarsMath.calcularMediana(medianList);
+
+    return median;
+}
+
+function medianTop10() {
+    const medianList = salarios.map(
+        person => medianUser(person.name)
+    );
+
+    const orderedMedian = MarsMath.orderArr(medianList);
+
+    const top = medianList.length / 10;
+    const limit = medianList.length - top;
+
+    const top10 = orderedMedian.slice(limit, orderedMedian.length);    
+    
+    const medianTop10 = MarsMath.calcularMediana(top10);
+    return medianTop10;
+
+}
